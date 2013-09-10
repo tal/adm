@@ -31,7 +31,7 @@ class ADM::AccessToken
 
   def self.request_data client_id, client_secret
     request = Typhoeus::Request.new(
-      'http://api.amazon.com/auth/O2/token',
+      'https://api.amazon.com/auth/O2/token',
       method: :post,
       body: {
         grant_type: :'client_credentials',
