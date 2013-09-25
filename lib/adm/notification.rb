@@ -2,10 +2,10 @@ class ADM::Notification
   attr_reader :registration_id, :message
 
   def initialize registration_id, message
-    if message.is_a?(Message)
+    if message.is_a?(ADM::Message)
       @message = message
     else
-      @message = Message.new(message)
+      @message = ADM::Message.new(message)
     end
 
     @registration_id = registration_id
@@ -35,6 +35,6 @@ class ADM::Notification
   end
 
   def queue hydra
-    hydra.queue(self)
+    hydra.queue(self.request)
   end
 end
