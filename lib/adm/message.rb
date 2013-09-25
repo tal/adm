@@ -11,11 +11,15 @@ class ADM::Message
       tokens = tokens.first
     end
 
-    tokens.each do |token|
-      ADM::Notification.new(token,self).queue(hydra)
+    notifications = tokens.collect do |token|
+      note = ADM::Notification.new(token,self)
+      note.queue(hydra)
+      note
     end
 
     hydra.run
+
+    notifications
   end
 
   def hydra

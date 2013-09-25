@@ -34,6 +34,24 @@ class ADM::Notification
     request.run
   end
 
+  def success?
+    response.success?
+  end
+
+  def response
+    request.response
+  end
+
+  def reesponse_json
+    MultiJson.load(response.body) if response.headers['Content-type'] == 'application/json'
+  end
+
+  def error
+    if !success?
+      reesponse_json['reason']
+    end
+  end
+
   def queue hydra
     hydra.queue(self.request)
   end
