@@ -29,15 +29,8 @@ class ADM::Message
   def compile
     @json ||= begin
       @compiled = true
-      data_to_compile = data.dup
 
-      if data[:data]
-        data_to_compile[:data] = MultiJson.dump(data[:data])
-      elsif data['data']
-        data_to_compile['data'] = MultiJson.dump(data['data'])
-      end
-
-      MultiJson.dump(data_to_compile)
+      MultiJson.dump(data)
     end
   end
 end
