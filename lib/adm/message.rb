@@ -29,8 +29,19 @@ class ADM::Message
   def compile
     @json ||= begin
       @compiled = true
+      compiled_data = data.dup
 
-      MultiJson.dump(data)
+      if compiled_data[:data]
+        compiled_data[:data].each do |k,v|
+          compiled_data[:data][k] = MultiJson.dump(compiled_data[:data][k])
+        end
+      elsif compiled_data['data']
+        compiled_data['data'].each do |k,v|
+          compiled_data['data'][k] = MultiJson.dump(compiled_data['data'][k])
+        end
+      end
+
+      MultiJson.dump(compiled_data)
     end
   end
 end
