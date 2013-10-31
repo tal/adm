@@ -23,7 +23,7 @@ class ADM::AccessToken
     data = request_data client_id, client_secret
 
     if data['error']
-      raise TokenGetError, response.body
+      raise TokenGetError, data['error_description']
     end
 
     new(data)
