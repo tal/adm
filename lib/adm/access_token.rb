@@ -34,14 +34,14 @@ class ADM::AccessToken
       'https://api.amazon.com/auth/O2/token',
       method: :post,
       body: {
-        grant_type: 'client_credentials',
-        scope: 'messaging:push',
+        grant_type: :'client_credentials',
+        scope: :'messaging:push',
         client_id: client_id,
         client_secret: client_secret
       },
       headers: {
-        :Accept => 'application/json',
-        :"Content-Type" => 'application/x-www-form-urlencoded'
+        :Accept => :'application/json',
+        :"Content-Type" => :'application/x-www-form-urlencoded'
       }
     )
     response = request.run
