@@ -23,7 +23,7 @@ class ADM::AccessToken
     data = request_data client_id, client_secret
 
     if data['error']
-      raise TokenGetError, response.body
+      raise TokenGetError, data['error_description']
     end
 
     new(data)
@@ -40,7 +40,8 @@ class ADM::AccessToken
         client_secret: client_secret
       },
       headers: {
-        :Accept => :'application/json'
+        :Accept => :'application/json',
+        :"Content-Type" => :'application/x-www-form-urlencoded'
       }
     )
     response = request.run

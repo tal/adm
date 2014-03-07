@@ -42,13 +42,13 @@ class ADM::Notification
     request.response
   end
 
-  def reesponse_json
+  def response_json
     MultiJson.load(response.body) if response.headers['Content-type'] == 'application/json'
   end
 
   def error
     if !success?
-      reesponse_json['reason']
+      response_json['reason']
     end
   end
 
